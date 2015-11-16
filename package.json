@@ -1,0 +1,19 @@
+{
+  "name": "new-inventory",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app.js",
+    "setup": "rm -rf node_modules public/bower_components && npm i && bower i"
+  },
+  "author": "Rachel Wood",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.14.1",
+    "express": "^4.13.3",
+    "jade": "^1.11.0",
+    "mongoose": "^4.2.5",
+    "morgan": "^1.6.1"
+  }
+}

@@ -1,0 +1,32 @@
+extends ./layout
+
+block css
+  link(href='css/style.css', rel='stylesheet')
+
+block content
+  .container
+    .row
+      .col-xs-12.text-center
+        h1= title
+    .row.roomRow
+      .col-xs-4
+        button.btn.btn-success#addRoom Add Room
+        ul.list-group#roomList
+        //- room list
+      .col-xs-8
+        //- items in room
+    .row#itemList
+      .col-xs-6.item#sampleItem
+        .media
+          .media-left
+            a(href='#')
+              img.media-object.itemImage(src='', alt='')
+          .media-body
+            h4.media-heading.itemName
+            p Value: 
+              span.itemValue
+            p.itemDescription
+
+        //- free items
+block js
+  script(src='js/main.js')

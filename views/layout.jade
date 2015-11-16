@@ -1,0 +1,14 @@
+doctype html
+html(lang='en')
+  head
+    title= title
+    link(href='vendor/bootstrap/dist/css/bootstrap.min.css', rel='stylesheet')
+    link(href='vendor/sweetalert/dist/sweetalert.css', rel='stylesheet')
+    block css
+  body
+    block content
+
+    script(src='vendor/jquery/dist/jquery.min.js')
+    script(src='vendor/bootstrap/dist/js/bootstrap.min.js')
+    script(src='vendor/sweetalert/dist/sweetalert.min.js')
+    block js
