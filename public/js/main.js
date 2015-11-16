@@ -6,7 +6,27 @@ function init() {
   putRoomsInList();
   putItemsInList();
   $('#addRoom').click(modalAddRoom);
+  $('#addItem').click(addItem)
   
+}
+
+function addItem() {
+  var itemName = $('.itemName').val();
+  var itemValue = $('.itemValue').val();
+  var itemDescription = $('.itemDescription').val();
+  var itemImg = $('.itemImg').val();
+  $.post('/items', {
+      name: itemName,
+      value: itemValue,
+      description: itemDescription,
+      image: itemImg
+  })
+    .done(function(item){
+      $('#itemList').append(itemListElement(item));
+    })
+    .fail(function(err){
+      console.error(err, "Item add failed.");
+    });
 }
 
 function modalAddRoom(){
@@ -34,9 +54,6 @@ function modalAddRoom(){
     })
   }); 
 }
-
-
-
 
 function putItemsInList() {
   $.get('/items')
