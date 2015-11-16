@@ -7,7 +7,26 @@ function init() {
   putItemsInList();
   $('#addRoom').click(modalAddRoom);
   $('#addItem').click(addItem)
-  
+  $('#roomList').on('click', '.room', showItemsInRoom);
+}
+
+function showItemsInRoom(e) {
+  $('#itemsInRoomList').empty();
+  var $target = $(e.target);
+  console.log("room selected");
+  var roomId = $target.data();
+  roomId = roomId.id;
+  console.log("room id: ", roomId);
+  $.get(`/rooms/${roomId}/items`)
+  .done(function(items) {
+    var $items = items.map(function(item){
+      return itemsInRoomListElement(item);
+    });
+    $('#itemsInRoomList').append($items);
+  })
+  .fail(function(err){
+    console.error(err);
+  });
 }
 
 function addItem() {
@@ -95,5 +114,12 @@ function roomListElement(room){
   var $li = $('<li>').addClass('list-group-item room');
   $li.text(room.name);
   $li.data('id', room._id);
+  return $li;
+}
+
+function itemsInRoomListElement(item){
+  var $li = $('<li>').addClass('list-group-item item');
+  $li.text(item.name, item.value, item.description);
+  $li.data('id', item._id);
   return $li;
 }
