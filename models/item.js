@@ -27,7 +27,14 @@ itemSchema.statics.findNotInRoom = function(cb) {
     var itemIds = rooms.reduce(function(itemIds, room){
       return itemIds.concat(room.items)
     }, []);
-    Item.find({_id: {$nin: itemIds}}, cb);
+    
+    Item.find({_id: {$nin: itemIds}}, function(err, unItems){
+      if(err) return cb(err);
+      cb(null, unItems)
+    });
+    //console.log("UNITEMSOUTER", unItemsOuter);
+    //if(err) return cb(err);
+    //cb(null, unItemsOuter)
   });
 };
 

@@ -16,13 +16,14 @@ function showItemsInRoom(e) {
   console.log("room selected");
   var roomId = $target.data();
   roomId = roomId.id;
-  console.log("room id: ", roomId);
+  var $buttonAdd = $('<button>').addClass('btn btn-success addItemToRoom').text(`Add an item to the ${$target.text()}`)
+  var $buttonRemove = $('<button>').addClass('btn btn-warning removeItemFromRoom').text(`Remove an item from the ${$target.text()}`)
   $.get(`/rooms/${roomId}/items`)
   .done(function(items) {
     var $items = items.map(function(item){
       return itemsInRoomListElement(item);
     });
-    $('#itemsInRoomList').append($items);
+    $('#itemsInRoomList').append($buttonAdd, $buttonRemove, $items);
   })
   .fail(function(err){
     console.error(err);
