@@ -16,6 +16,18 @@ block content
       .col-xs-8
         //- items in room
     .row#itemList
+      .row.addItemRow
+        h3.addItemTitle Add Item
+        .col-xs-3
+          label(for="itemName") Item name:
+          input(type="text" class="itemName")
+        .col-xs-3
+          label(for="itemValue") Item value:
+          input(type="number" class="itemValue")
+        .col-xs-3
+          label(for="itemDescription") Item description:
+          input(type="text" class="itemDescription")
+        button.btn.btn-success#addItem Add Item
       .col-xs-6.item#sampleItem
         .media
           .media-left

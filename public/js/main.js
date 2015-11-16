@@ -6,6 +6,7 @@ function init() {
   putRoomsInList();
   putItemsInList();
   $('#addRoom').click(modalAddRoom);
+  
 }
 
 function modalAddRoom(){
@@ -33,6 +34,9 @@ function modalAddRoom(){
     })
   }); 
 }
+
+
+
 
 function putItemsInList() {
   $.get('/items')

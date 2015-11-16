@@ -10,7 +10,7 @@ var mongoose = require('mongoose');
 var PORT = process.env.PORT || 3000;
 
 //  connect to db
-mongoose.connect(process.env.MONGOLAB_URI || 'mongodb://localhost/new-inventory');
+mongoose.connect(process.env.MONGOLAB_URI || 'mongodb://localhost/newinventory');
 
 // initialize express app
 var app = express();
