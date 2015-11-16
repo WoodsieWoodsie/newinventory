@@ -6,24 +6,35 @@ function init() {
   putRoomsInList();
   putItemsInList();
   $('#addRoom').click(modalAddRoom);
-  $('#addItem').click(addItem)
+  $('#addItem').click(addItem);
   $('#roomList').on('click', '.room', showItemsInRoom);
+  $('.roomRow').on('click', '.addItemToRoom', addItemToRoom);
+  
+}
+
+function addItemToRoom() {
+
 }
 
 function showItemsInRoom(e) {
-  $('#itemsInRoomList').empty();
+  $('.itemsInRoom').remove();
+  $('.addItemToRoom').remove();
   var $target = $(e.target);
   console.log("room selected");
   var roomId = $target.data();
   roomId = roomId.id;
-  var $buttonAdd = $('<button>').addClass('btn btn-success addItemToRoom').text(`Add an item to the ${$target.text()}`)
-  var $buttonRemove = $('<button>').addClass('btn btn-warning removeItemFromRoom').text(`Remove an item from the ${$target.text()}`)
+  // var $buttonAdd = $('<button>').addClass('btn btn-success addItemToRoom').text(`Add an item to ${$target.text()}`)
+  // $buttonAdd.attr('type', 'button');
+  // $buttonAdd.attr({data: {toggle: 'modal'}});
+
+  // $buttonAdd.attr({data: {target: $('#myModal')}});
   $.get(`/rooms/${roomId}/items`)
   .done(function(items) {
+    $('.addItemToRoomButton').show();
     var $items = items.map(function(item){
       return itemsInRoomListElement(item);
     });
-    $('#itemsInRoomList').append($buttonAdd, $buttonRemove, $items);
+    $('.roomRow').append($items);
   })
   .fail(function(err){
     console.error(err);
@@ -31,10 +42,10 @@ function showItemsInRoom(e) {
 }
 
 function addItem() {
-  var itemName = $('.itemName').val();
-  var itemValue = $('.itemValue').val();
-  var itemDescription = $('.itemDescription').val();
-  var itemImg = $('.itemImg').val();
+  var itemName = $('.itemNameInput').val();
+  var itemValue = $('.itemValueInput').val();
+  var itemDescription = $('.itemDescriptionInput').val();
+  var itemImg = $('.itemImgInput').val();
   $.post('/items', {
       name: itemName,
       value: itemValue,
@@ -43,6 +54,10 @@ function addItem() {
   })
     .done(function(item){
       $('#itemList').append(itemListElement(item));
+      $('.itemNameInput').val('');
+      $('.itemValueInput').val('');
+      $('.itemDescriptionInput').val('');
+      $('.itemImgInput').val('');
     })
     .fail(function(err){
       console.error(err, "Item add failed.");
@@ -119,8 +134,12 @@ function roomListElement(room){
 }
 
 function itemsInRoomListElement(item){
-  var $li = $('<li>').addClass('list-group-item item');
-  $li.text(item.name, item.value, item.description);
-  $li.data('id', item._id);
-  return $li;
+  var $item = $('#sampleItemInRoom').clone();
+  $item.removeAttr('id');
+  $item.find('.itemInRoomName').text(item.name);
+  $item.find('.itemInRoomValue').text(item.value);
+  $item.find('.itemInRoomDescription').text(item.description);
+  $item.find('.itemInRoomImage').attr('src', item.image);
+  $item.addClass('itemsInRoom');
+  return $item;
 }

@@ -5,6 +5,20 @@ block css
 
 block content
   .container
+
+    #myModal.modal.fade(tabindex='-1', role='dialog', aria-labelledby='myModalLabel')
+      .modal-dialog(role='document')
+        .modal-content
+          .modal-header
+            button.close(type='button', data-dismiss='modal', aria-label='Close')
+              span(aria-hidden='true') ×
+            h4#myModalLabel.modal-title Modal title
+          .modal-body
+            | ...
+          .modal-footer
+            button.btn.btn-default(type='button', data-dismiss='modal') Close
+            button.btn.btn-primary(type='button') Save changes
+
     .row
       .col-xs-12.text-center
         h1= title
@@ -12,25 +26,35 @@ block content
       .col-xs-4
         button.btn.btn-success#addRoom Add Room
         ul.list-group#roomList
-        //- room list
-      .col-xs-8
-        ul.list-group#itemsInRoomList
-        //- items in room
+      .col-xs-7#sampleItemInRoom
+        .media
+          .media-left
+            a(href='#')
+              img.media-object.itemInRoomImage(src='', alt='')
+          .media-body
+            h4.media-heading.itemInRoomName
+            p Value: $
+              span.itemInRoomValue
+            p
+              span.itemInRoomDescription
+          //- button.btn.btn-primary.editItemInRoom Edit Item
+          //- button.btn.btn-warning.removeItemFromRoom Remove Item
+      button(type="button", class="btn btn-primary addItemToRoomButton" data-toggle="modal" data-target="#myModal") Add item to room
     .row#itemList
       .row.addItemRow
         h3.addItemTitle Add Item
         .col-xs-3
-          label(for="itemName") Item name:
-          input(type="text" class="itemName")
+          label(for="itemNameInput") Item name:
+          input(type="text" class="itemNameInput")
         .col-xs-3
-          label(for="itemValue") Item value:
-          input(type="number" class="itemValue")
+          label(for="itemValueInput") Item value:
+          input(type="number" class="itemValueInput")
         .col-xs-3
-          label(for="itemDescription") Item description:
-          input(type="text" class="itemDescription")
+          label(for="itemDescriptionInput") Item description:
+          input(type="text" class="itemDescriptionInput")
         .col-xs-3
-          label(for="itemImg") Item image url:
-          input(type="text" class="itemImg")
+          label(for="itemImgInput") Item image url:
+          input(type="text" class="itemImgInput")
       .row.buttonRow
         button.btn.btn-success#addItem Add Item
       .col-xs-6.item#sampleItem
@@ -44,6 +68,6 @@ block content
               span.itemValue
             p.itemDescription
 
-        //- free items
+
 block js
   script(src='js/main.js')

@@ -1,14 +1,24 @@
+.btn {
+  letter-spacing: .5px;
+}
+
 .roomRow {
   border: 1px solid lightgray;
   padding: 5px;
 }
 
-.itemImage {
+.itemsInRoom {
+  border: 1px solid lightgray;
+  padding: 5px;
+  border-radius: 3px;
+}
+
+.itemImage, .itemInRoomImage {
   max-width: 100px;
   max-height: 100px;
 }
 
-#sampleItem {
+#sampleItem, #sampleItemInRoom {
   display: none;
 }
 
@@ -32,4 +42,12 @@
 
 .buttonRow {
   padding: 15px;
+}
+
+#roomList, #addRoom, .addItemToRoom, .removeItemFromRoom, .itemsInRoom {
+  margin-top: 15px;
+}
+
+.addItemToRoomButton {
+  display: none;
 }
